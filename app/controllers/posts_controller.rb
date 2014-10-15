@@ -25,7 +25,7 @@ class PostsController < ApplicationController
     
     if @post.save
       flash[:notice] = "Post was saved."
-      redirect_to @post
+      redirect_to topic_post_path(@post.topic, @post)
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :new
