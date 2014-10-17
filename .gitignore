@@ -20,3 +20,6 @@
 
 # Ignore secret token.
 /config/initializers/secret_token.rb
+
+# Carrierwave image
+public/uploads
