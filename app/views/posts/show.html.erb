@@ -2,21 +2,26 @@
 
 <div class="row">
   <div class="col-md-8">
-    <small>
+     <small>
        <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
        submitted <%= time_ago_in_words(@post.created_at) %> ago by
        <%= @post.user.name %>
      </small>
-     <small>
-       <%= image_tag(@post.image.url) if @post.image? %>
-       submitted <%= time_ago_in_words(@post.created_at) %> ago by
-       <%= @post.user.name %>
-     </small>
-    <p><%= markdown @post.body %></p>
+      <div><%= image_tag(@post.image.url) if @post.image? %></div>
+      <p><%= markdown @post.body %></p>
+      <% if policy(@post).edit? %>
+      <%= link_to "Edit Post", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
+      <% end %>
   </div>
-  <div class="col-md-4">
-    <% if policy(@post).edit? %>
-      <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
-    <% end %>
-  </div>
+     <div class="col-md-4">
+      <h4> Comments</h4>
+      <!-- Loop over each comment to display comments -->
+      <% @post.comments.each do |comment| %>
+        <%= markdown comment.body %>
+      <!-- Display name of user who posted commnent -->
+        <small><%= comment.user.name %></small>  
+      <% end %>
+        <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
+      </div>
+   </div>
 </div>

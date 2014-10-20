@@ -1,0 +1,3 @@
+<% @posts.each do |comment| %>   
+  <%= link_to (markdown comment.post.title), [@topic, post, comment] %>
+<% end %>
