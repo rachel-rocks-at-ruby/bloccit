@@ -11,6 +11,11 @@ gem 'rails', '4.1.6'
  group :development do
    gem 'sqlite3'
  end
+
+ group :test do
+  gem 'rspec-rails', '~> 3.1.0'
+end
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -49,6 +54,8 @@ gem 'fog'
 gem 'will_paginate', '~> 3.0.5'
 gem 'binding_of_caller'
 gem 'better_errors'
+gem 'pry'
+gem 'quiet_assets'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
