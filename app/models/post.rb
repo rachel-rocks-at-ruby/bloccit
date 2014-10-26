@@ -1,3 +1,4 @@
+
 class Post < ActiveRecord::Base
   
   belongs_to :user
@@ -21,7 +22,7 @@ class Post < ActiveRecord::Base
   end
 
   def points
-    Vote.sum(:value)
+    votes.sum(:value)
   end
 
   def update_rank
