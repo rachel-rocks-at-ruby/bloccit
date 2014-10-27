@@ -2,14 +2,11 @@
  
  describe "Visiting profiles" do
  
-   include TestFactories
- 
    before do 
-     @user = authenticated_user
-     @post = associated_post(user: @user)
-     @comment = Comment.new(user: @user, body: "A Comment")
-     allow(@comment).to receive(:send_favorite_emails)
-     @comment.save
+     @user = create(:user)
+     @topic = Topic.create(description: "A topic")
+     @post = create(:post, user: @user, topic: @topic)
+     @comment = create(:comment, post: @post, user: @user)
    end
  
    describe "not signed in" do
