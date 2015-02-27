@@ -6,7 +6,6 @@ gem 'rails', '4.1.6'
  group :production do
    gem 'pg'
    gem 'rails_12factor'
-   gem 'rspec-rails'
  end
  
  group :development do

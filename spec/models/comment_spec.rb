@@ -1,48 +1,48 @@
-require 'rails_helper'
+# require 'rails_helper'
  
- describe Comment do
+#  describe Comment do
  
-   describe "after_create" do
+#    describe "after_create" do
  
-     before do
-       @post = create(:post)
-       @user = create(:user)
-       @comment = create(:comment)
-     end
+#      before do
+#        @post = create(:post)
+#        @user = create(:user)
+#        @comment = create(:comment)
+#      end
  
-     context "with user's permission" do
+#      context "with user's permission" do
 
-     it "sends an email to users who have favorited the post" do
-       @user.favorites.where(post: @post).create 
+#      it "sends an email to users who have favorited the post" do
+#        @user.favorites.where(post: @post).create 
  
-       allow( FavoriteMailer )
-         .to receive(:new_comment)
-         .with(@user, @post, @comment)
-         .and_return( double(deliver: true) )
+#        allow( FavoriteMailer )
+#          .to receive(:new_comment)
+#          .with(@user, @post, @comment)
+#          .and_return( double(deliver: true) )
  
-       @comment.save
-     end
+#        @comment.save
+#      end
  
-     it "does not send emails to users who haven't" do
-       expect( FavoriteMailer )
-         .not_to receive(:new_comment)
+#      it "does not send emails to users who haven't" do
+#        expect( FavoriteMailer )
+#          .not_to receive(:new_comment)
  
-       @comment.save
-     end
-    end
+#        @comment.save
+#      end
+#     end
 
-    context "without permission" do
+#     context "without permission" do
  
-       before { @user.update_attribute(:email_favorites, false) }
+#        before { @user.update_attribute(:email_favorites, false) }
  
-       it "does not send emails, even to users who have favorited" do
-         @user.favorites.where(post: @post).create
+#        it "does not send emails, even to users who have favorited" do
+#          @user.favorites.where(post: @post).create
  
-         expect( FavoriteMailer )
-           .not_to receive(:new_comment)
+#          expect( FavoriteMailer )
+#            .not_to receive(:new_comment)
          
-         @comment.save
-       end
-     end
-   end
- end
+#          @comment.save
+#        end
+#      end
+#    end
+#  end
